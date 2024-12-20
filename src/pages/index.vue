@@ -111,16 +111,11 @@
 
 <script lang="ts" setup>
 import { locationOptions, triggerOptions } from "@/const";
-import {
-  downloadICS,
-  formatLocalizedDate,
-  generateICS,
-  getMinDate,
-} from "@/utils";
+import { SharedEvent } from "@/types";
+import { base64_encode, formatLocalizedDate, getMinDate } from "@/utils";
 import { isAfter } from "date-fns";
 
 const title = ref("");
-// const description = ref("");
 const notification = ref(triggerOptions[0]);
 const startDate = ref("");
 const endDate = ref("");
@@ -196,18 +191,26 @@ const handleChangeWithLocation = (value: boolean) => {
 };
 
 const handleSubmit = () => {
-  const icsContent = generateICS(
-    title.value,
-    "Описание события",
-    startDate.value,
-    endDate.value,
-    notification.value.value,
-    {
-      location: [lat.value, lng.value],
-      geocode: geocode.value,
-    }
-  );
-  downloadICS(icsContent);
+  const sharedEvent: SharedEvent = {
+    title: title.value,
+    description: "Описание события",
+    startDate: startDate.value,
+    endDate: endDate.value,
+    notification: notification.value.value,
+    icsLocation: withLocation.value
+      ? {
+          location: [lat.value, lng.value],
+          geocode: geocode.value,
+        }
+      : undefined,
+  };
+  navigator.share({
+    url: `https://andreevgs.github.io/eventr/#/event_${base64_encode(
+      JSON.stringify(sharedEvent)
+    )}`,
+  });
+  // const icsContent = generateICS(sharedEvent);
+  // downloadICS(icsContent);
 };
 </script>
 

@@ -1,22 +1,13 @@
+import { SharedEvent } from "@/types";
 import { formatDateForICS } from "./date";
-
-interface ICSLocation {
-  location: [number?, number?];
-  geocode: string;
-}
 
 const roundToFourDecimals = (value: number): number => {
   return Math.round(value * 10000) / 10000;
 };
 
-export const generateICS = (
-  title: string,
-  description: string,
-  startDate: string,
-  endDate: string,
-  notification: string,
-  icsLocation?: ICSLocation
-) => {
+export const generateICS = (sharedEvent: SharedEvent) => {
+  const { title, description, icsLocation, startDate, endDate, notification } =
+    sharedEvent;
   const icsContent = [];
   icsContent.push("BEGIN:VCALENDAR");
   icsContent.push("VERSION:2.0");

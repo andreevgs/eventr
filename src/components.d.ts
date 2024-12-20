@@ -7,14 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AppBar: typeof import('./components/AppBar.vue')['default']
-    BoardColumn: typeof import('./components/BoardColumn.vue')['default']
     DateTimePicker: typeof import('./components/DateTimePicker.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     LocationPicker: typeof import('./components/LocationPicker.vue')['default']
     NativeSelect: typeof import('./components/NativeSelect.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Task: typeof import('./components/Task.vue')['default']
   }
 }
