@@ -25,7 +25,7 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
 });
-
+console.log(import.meta.env.BASE_URL);
 const pinia = createPinia();
 
 createApp(App).use(pinia).use(router).use(vuetify).mount("#app");
