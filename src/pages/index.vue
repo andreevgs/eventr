@@ -205,8 +205,8 @@ const handleSubmit = () => {
       : undefined,
   };
   navigator.share({
-    url: `https://andreevgs.github.io/eventr/#/event_${base64_encode(
-      JSON.stringify(sharedEvent)
+    url: `https://andreevgs.github.io/eventr/#/event_${encodeURIComponent(
+      base64_encode(JSON.stringify(sharedEvent))
     )}`,
   });
   // const icsContent = generateICS(sharedEvent);

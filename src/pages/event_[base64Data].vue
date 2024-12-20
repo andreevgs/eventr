@@ -21,7 +21,7 @@ const route = useRoute("/event_[base64Data]");
 
 const handleAddToCalendar = () => {
   const sharedEvent = JSON.parse(
-    base64_decode(route.params.base64Data)
+    decodeURIComponent(base64_decode(route.params.base64Data))
   ) as SharedEvent;
   const icsContent = generateICS(sharedEvent);
   downloadICS(icsContent);
