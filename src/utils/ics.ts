@@ -51,7 +51,7 @@ export const generateICS = (
         icsLocation.geocode
       }:geo:${roundToFourDecimals(
         icsLocation.location[0]
-      )};${roundToFourDecimals(icsLocation.location[1])}`
+      )},${roundToFourDecimals(icsLocation.location[1])}`
     );
   }
   icsContent.push("END:VEVENT");
