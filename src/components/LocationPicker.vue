@@ -79,13 +79,13 @@ const onUpdateCenter = async (newCenter: LatLng) => {
     // Запрос к API Nominatim
     const response = await fetch(url);
     const data = await response.json();
-    const name = data.display_name
-      .split(",")
-      .slice(0, 2)
-      .join(",")
-      .replace(/,/g, "");
+    // const name = data.display_name
+    //   .split(",")
+    //   .slice(0, 2)
+    //   .join(",")
+    //   .replace(/,/g, "");
 
-    geocode.value = name;
+    geocode.value = data.display_name;
   } catch {
     geocode.value = "Место встречи";
   }
