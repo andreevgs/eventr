@@ -241,6 +241,7 @@ select {
   .card {
     box-shadow: none;
     position: static;
+    padding-bottom: 24px;
     .submit-button-wrapper {
       padding: 16px 24px;
       position: fixed;
