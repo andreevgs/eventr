@@ -73,19 +73,21 @@ const onUpdateCenter = async (newCenter: LatLng) => {
   console.log(newCenter);
   lat.value = newCenter.lat;
   lng.value = newCenter.lng;
-  const url = `https://nominatim.openstreetmap.org/reverse?lat=${newCenter.lat}&lon=${newCenter.lng}&format=json&addressdetails=1`;
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${newCenter.lat}&lon=${newCenter.lng}&format=json`;
 
   try {
     // Запрос к API Nominatim
     const response = await fetch(url);
     const data = await response.json();
+    const name = data.display_name
+      .split(",")
+      .slice(0, 2)
+      .join(",")
+      .replace(/,/g, "");
 
-    if (data && data.display_name) {
-      // Обновляем geocode с результатами
-      geocode.value = data.display_name.replace(/,/g, "");
-    }
+    geocode.value = name;
   } catch {
-    geocode.value = "Непоняно где";
+    geocode.value = "Место встречи";
   }
 };
 </script>

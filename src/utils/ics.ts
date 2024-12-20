@@ -5,6 +5,10 @@ interface ICSLocation {
   geocode: string;
 }
 
+const roundToFourDecimals = (value: number): number => {
+  return Math.round(value * 10000) / 10000;
+};
+
 export const generateICS = (
   title: string,
   description: string,
@@ -36,10 +40,18 @@ export const generateICS = (
     icsLocation.geocode
   ) {
     icsContent.push(
-      `GEO:${icsLocation.location[0]};${icsLocation.location[1]}`
+      `GEO:${roundToFourDecimals(
+        icsLocation.location[0]
+      )};${roundToFourDecimals(icsLocation.location[1])}`
     );
     icsContent.push(
-      `X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=${icsLocation.geocode};X-APPLE-RADIUS=500;X-TITLE=${icsLocation.geocode}:geo:${icsLocation.location[0]};${icsLocation.location[1]}`
+      `X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=${
+        icsLocation.geocode
+      };X-APPLE-RADIUS=500;X-TITLE=${
+        icsLocation.geocode
+      }:geo:${roundToFourDecimals(
+        icsLocation.location[0]
+      )};${roundToFourDecimals(icsLocation.location[1])}`
     );
   }
   icsContent.push("END:VEVENT");
