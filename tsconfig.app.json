@@ -11,7 +11,7 @@
     "types": [
       "unplugin-vue-router/client"
     ],
-    "baseUrl": ".",
+    "baseUrl": "/eventr/",
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
