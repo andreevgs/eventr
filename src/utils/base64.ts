@@ -75,8 +75,7 @@ function base64_charIndex(c: string) {
  */
 export function base64_decode(data: string) {
   let dst = "";
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  let i, a, b, c, d, z;
+  let i, a, b, c, d;
 
   for (i = 0; i < data.length - 3; i += 4) {
     a = base64_charIndex(data.charAt(i + 0));
@@ -93,15 +92,4 @@ export function base64_decode(data: string) {
 
   dst = decodeURIComponent(escape(dst));
   return dst;
-}
-
-/* base64url_sniff
- * Check whether specified base64 string contains base64url specific characters.
- * Return true if specified string is base64url encoded, false otherwise.
- */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function base64url_sniff(base64: string) {
-  if (base64.indexOf("-") >= 0) return true;
-  if (base64.indexOf("_") >= 0) return true;
-  return false;
 }
