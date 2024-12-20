@@ -82,7 +82,7 @@ const onUpdateCenter = async (newCenter: LatLng) => {
 
     if (data && data.display_name) {
       // Обновляем geocode с результатами
-      geocode.value = data.display_name.replace(",", "");
+      geocode.value = data.display_name.replace(/,/g, "");
     }
   } catch {
     geocode.value = "Непоняно где";
