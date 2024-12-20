@@ -1,7 +1,7 @@
 import { formatDateForICS } from "./date";
 
 interface ICSLocation {
-  location: [number, number];
+  location: [number?, number?];
   geocode: string;
 }
 
@@ -20,7 +20,8 @@ export const generateICS = (
   icsContent.push("BEGIN:VEVENT");
   icsContent.push(`SUMMARY:${title}`);
   icsContent.push(`DESCRIPTION:${description}`);
-  if (icsLocation) icsContent.push(`LOCATION:${icsLocation.geocode}`);
+  if (icsLocation && icsLocation.geocode)
+    icsContent.push(`LOCATION:${icsLocation.geocode}`);
   icsContent.push(`DTSTART:${formatDateForICS(startDate)}`);
   icsContent.push(`DTEND:${formatDateForICS(endDate)}`);
   icsContent.push("BEGIN:VALARM");
@@ -28,7 +29,12 @@ export const generateICS = (
   icsContent.push("ACTION:DISPLAY");
   icsContent.push("DESCRIPTION:Напоминание о событии");
   icsContent.push("END:VALARM");
-  if (icsLocation) {
+  if (
+    icsLocation &&
+    icsLocation.location[0] &&
+    icsLocation.location[1] &&
+    icsLocation.geocode
+  ) {
     icsContent.push(
       `GEO:${icsLocation.location[0]};${icsLocation.location[1]}`
     );

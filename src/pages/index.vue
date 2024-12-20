@@ -201,7 +201,11 @@ const handleSubmit = () => {
     "Описание события",
     startDate.value,
     endDate.value,
-    notification.value.value
+    notification.value.value,
+    {
+      location: [lat.value, lng.value],
+      geocode: geocode.value,
+    }
   );
   downloadICS(icsContent);
 };
